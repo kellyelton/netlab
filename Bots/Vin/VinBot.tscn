@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/Map1.png" type="Texture" id=1]
+[ext_resource path="res://Bots/Vin/VinBot.gd" type="Script" id=2]
+[ext_resource path="res://Components/Selection/Selection.tscn" type="PackedScene" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 272, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1.5, 1.5 )
+
+[node name="VinBot" type="KinematicBody2D" groups=["bot"]]
+input_pickable = true
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -5.96046e-08, -1.19209e-07 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 0.5 )
+shape = SubResource( 3 )
+
+[node name="rays" type="Node2D" parent="."]
+
+[node name="ray0" type="RayCast2D" parent="rays"]
+position = Vector2( 0, -4 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray1" type="RayCast2D" parent="rays"]
+position = Vector2( 3, -3 )
+rotation = -0.785398
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray2" type="RayCast2D" parent="rays"]
+position = Vector2( 3, 0 )
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray3" type="RayCast2D" parent="rays"]
+position = Vector2( 2, 3 )
+rotation = 0.785398
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray4" type="RayCast2D" parent="rays"]
+position = Vector2( -8.88178e-16, 4 )
+rotation = 1.56032
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray5" type="RayCast2D" parent="rays"]
+position = Vector2( -3, 3 )
+rotation = 2.44346
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray6" type="RayCast2D" parent="rays"]
+position = Vector2( -4, 0 )
+rotation = -3.14159
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="ray7" type="RayCast2D" parent="rays"]
+position = Vector2( -4, -3 )
+rotation = -2.26893
+enabled = true
+cast_to = Vector2( 32, 0 )
+
+[node name="FollowCam" type="Camera2D" parent="."]
+zoom = Vector2( 0.1, 0.1 )
+
+[node name="Selection" parent="." instance=ExtResource( 3 )]
+position = Vector2( -0.5, 0 )
+scale = Vector2( 0.8, 0.8 )
+
+[connection signal="input_event" from="." to="." method="_on_VinBot_input_event"]
