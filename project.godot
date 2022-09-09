@@ -25,9 +25,34 @@ _global_script_classes=[ {
 "path": "res://Scripts/MatrixOperator.gd"
 }, {
 "base": "Reference",
+"class": "Net2",
+"language": "GDScript",
+"path": "res://Scripts/Net2.gd"
+}, {
+"base": "Reference",
 "class": "NeuralNetwork",
 "language": "GDScript",
 "path": "res://Scripts/NeuralNet.gd"
+}, {
+"base": "Reference",
+"class": "Neuron",
+"language": "GDScript",
+"path": "res://Scripts/Neuron.gd"
+}, {
+"base": "Container",
+"class": "NeuronContainer",
+"language": "GDScript",
+"path": "res://Scenes/BrainBuilder/NeuronContainer.gd"
+}, {
+"base": "GridContainer",
+"class": "NeuronNode",
+"language": "GDScript",
+"path": "res://Scenes/BrainBuilder/NeuronNode.gd"
+}, {
+"base": "GridContainer",
+"class": "NeuronProperties",
+"language": "GDScript",
+"path": "res://Scenes/BrainBuilder/NeuronProperties.gd"
 }, {
 "base": "Reference",
 "class": "SmooshController",
@@ -43,7 +68,12 @@ _global_script_class_icons={
 "KirkController": "",
 "Matrix": "",
 "MatrixOperator": "",
+"Net2": "",
 "NeuralNetwork": "",
+"Neuron": "",
+"NeuronContainer": "",
+"NeuronNode": "",
+"NeuronProperties": "",
 "SmooshController": "",
 "VinController": ""
 }
@@ -51,13 +81,17 @@ _global_script_class_icons={
 [application]
 
 config/name="NetLab"
-run/main_scene="res://Map1/Map1.tscn"
+run/main_scene="res://Scenes/BrainBuilder/BrainBuilder.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
+
+[global]
+
+cursor=false
 
 [input]
 
@@ -99,6 +133,11 @@ toggle_health_bars={
 toggle_pan_cam_mode={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+brainbuilder_action1={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

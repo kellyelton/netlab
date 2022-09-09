@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/BrainBuilder/BrainBuilder.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/BrainBuilder/NeuronContainer.gd" type="Script" id=2]
+
+[node name="BrainBuilder" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0862745, 0.117647, 0.156863, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 22.0
+
+[node name="SelectToolButton" type="ToolButton" parent="VBoxContainer/HFlowContainer"]
+margin_right = 51.0
+margin_bottom = 22.0
+toggle_mode = true
+text = "Select"
+
+[node name="AddNeuronToolButton" type="ToolButton" parent="VBoxContainer/HFlowContainer"]
+margin_left = 55.0
+margin_right = 92.0
+margin_bottom = 22.0
+toggle_mode = true
+text = "Add"
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
+margin_top = 26.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+split_offset = 800
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 800.0
+margin_bottom = 574.0
+
+[node name="NeuronContainer" type="Container" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+margin_right = 800.0
+margin_bottom = 574.0
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 812.0
+margin_right = 1024.0
+margin_bottom = 574.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 205.0
+margin_bottom = 567.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+margin_right = 198.0
+margin_bottom = 560.0
+
+[connection signal="toggled" from="VBoxContainer/HFlowContainer/SelectToolButton" to="." method="_on_SelectToolButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/HFlowContainer/AddNeuronToolButton" to="." method="_on_AddNeuronToolButton_toggled"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/MarginContainer/NeuronContainer" to="VBoxContainer/HBoxContainer/MarginContainer/NeuronContainer" method="_on_NeuronContainer_gui_input"]
+[connection signal="selected_changed" from="VBoxContainer/HBoxContainer/MarginContainer/NeuronContainer" to="." method="_on_NeuronContainer_selected_changed"]
