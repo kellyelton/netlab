@@ -22,6 +22,7 @@ var outputs := []
 var inputs := []
 var is_selected := false
 var is_mouse_down := false
+var save_id := get_instance_id()
 
 func get_relative_snap_point(relative_to: Vector2):
 	var angle := relative_to.angle_to_point(rect_position)
@@ -44,39 +45,50 @@ func _container_mouse_move(pos: Vector2):
 	
 	update()
 
-var InputColor := Color(0.2, 0.6, 0.6, 0.9)
-var InputMouseOverColor := Color(0.4, 0.8, 0.8, 0.9)
-var InputMouseDownColor := Color(0.2, 0.6, 0.6, 0.6)
-var InputSelectedColor := Color(0.6, 1, 1, 0.8)
-var InputSelectedMouseOverColor := Color(0.8, 1, 1, 0.9)
-var InputSelectedMouseDownColor := Color(0.4, 1, 1, 0.7)
+const InputColor := Color(0.2, 0.6, 0.6)
+const InputMouseOverColor := Color(0.4, 0.8, 0.8)
+const InputMouseDownColor := Color(0.6, 1, 1)
+const InputSelectedColor := Color(0.6, 1, 1)
+const InputSelectedMouseOverColor := Color(0.8, 1, 1)
+const InputSelectedMouseDownColor := Color(0.6, 1, 1)
 
-var OutputColor := Color(0.6, 0.4, 0.2, 0.9)
-var OutputMouseOverColor := Color(0.6, 0.5, 0.3, 0.9)
-var OutputMouseDownColor := Color(0.6, 0.4, 0.2, 0.6)
-var OutputSelectedColor := Color(1, 0.8, 0.6, 0.8)
-var OutputSelectedMouseOverColor := Color(1, 1, 0.8, 0.9)
-var OutputSelectedMouseDownColor := Color(0.8, 0.6, 0.4, 0.7)
+const OutputColor := Color(0.6, 0.4, 0.2)
+const OutputMouseOverColor := Color(0.6, 0.5, 0.3)
+const OutputMouseDownColor := Color(0.6, 0.4, 0.2)
+const OutputSelectedColor := Color(1, 0.8, 0.6)
+const OutputSelectedMouseOverColor := Color(1, 1, 0.8)
+const OutputSelectedMouseDownColor := Color(0.8, 0.6, 0.4)
 
-var HiddenColor := Color(0.2, 0.2, 0.8, 0.9)
-var HiddenMouseOverColor := Color(0.3, 0.3, 0.8, 0.9)
-var HiddenMouseDownColor := Color(0.3, 0.3, 0.9, 1)
-var HiddenSelectedColor := Color(0.6, 0.6, 0.95, 0.8)
-var HiddenSelectedMouseOverColor := Color(0.85, 0.85, 0.99, 0.9)
-var HiddenSelectedMouseDownColor := Color(0.4, 0.4, 0.95, 0.7)
+const HiddenColor := Color(0.2, 0.2, 0.8)
+const HiddenMouseOverColor := Color(0.3, 0.3, 0.8)
+const HiddenMouseDownColor := Color(0.3, 0.3, 0.9)
+const HiddenSelectedColor := Color(0.6, 0.6, 0.95)
+const HiddenSelectedMouseOverColor := Color(0.85, 0.85, 0.99)
+const HiddenSelectedMouseDownColor := Color(0.4, 0.4, 0.95)
+
+func get_main_color() -> Color:
+	if type == TYPE_INPUT:
+		return InputColor
+	elif type == TYPE_HIDDEN:
+		return HiddenColor
+	elif type == TYPE_OUTPUT:
+		return OutputColor
+	else:
+		print_debug("Unexpected neuron type " + str(type))
+		return Color.pink
 
 func _draw():
 	if type == TYPE_INPUT:
 		if is_selected:
 			if is_mouse_down:
-				draw_circle(Vector2.ZERO, radius + 2, InputSelectedMouseDownColor)
+				draw_circle(Vector2.ZERO, radius - 2, InputSelectedMouseDownColor)
 			elif is_mouse_over:
 				draw_circle(Vector2.ZERO, radius + 8, InputSelectedMouseOverColor)
 			else:
 				draw_circle(Vector2.ZERO, radius + 4, InputSelectedColor)
 		else:
 			if is_mouse_down:
-				draw_circle(Vector2.ZERO, radius - 3, InputMouseDownColor)
+				draw_circle(Vector2.ZERO, radius - 2, InputMouseDownColor)
 			elif is_mouse_over:
 				draw_circle(Vector2.ZERO, radius + 8, InputMouseOverColor)
 			else:

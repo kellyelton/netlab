@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/BrainBuilder/BrainBuilder.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/BrainBuilder/NeuronContainer.gd" type="Script" id=2]
+[ext_resource path="res://Resources/gridback.png" type="Texture" id=3]
 
 [node name="BrainBuilder" type="Control"]
 anchor_right = 1.0
@@ -12,6 +13,13 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0862745, 0.117647, 0.156863, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
