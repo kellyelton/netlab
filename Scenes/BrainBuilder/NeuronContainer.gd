@@ -136,6 +136,21 @@ func set_mouse_mode(new_mouse_mode):
 	
 	mouse_mode = new_mouse_mode
 	
+	if mouse_mode == MM_DEFAULT:
+		print("mm=default")
+	elif mouse_mode == MM_CREATE_CONNECTION:
+		print("mm=create connection")
+	elif mouse_mode == MM_CREATING_CONNECTION:
+		print("mm=creating connection")
+	elif mouse_mode == MM_CREATE_NEURON:
+		print("mm=create neuron")
+	elif mouse_mode == MM_CREATING_NEURON:
+		print("mm=creating neuron")
+	elif mouse_mode == MM_SELECTING_NEURON:
+		print("mm=selecting neuron")
+	else:
+		print("mm=" + str(mouse_mode))
+	
 	emit_signal("mouse_mode_changed", mouse_mode)
 
 func _notification(what):
@@ -170,8 +185,8 @@ func update_mouse_mode() -> void:
 		elif is_left_mouse_button_down:
 			new_mode = MM_SELECTING_NEURON
 			selecting = closest_to_mouse
-			selected = closest_to_mouse
 			closest_to_mouse.is_mouse_down = true
+			select(closest_to_mouse)
 	elif mouse_mode == MM_CREATE_NEURON:
 		if closest_to_mouse != null:
 			new_mode = MM_DEFAULT
@@ -206,7 +221,6 @@ func update_mouse_mode() -> void:
 	elif mouse_mode == MM_SELECTING_NEURON:
 		if not is_left_mouse_button_down:
 			selecting.is_mouse_down = false
-			select(selecting)
 			selecting = null
 			new_mode = MM_DEFAULT
 		else:
@@ -378,13 +392,16 @@ func select(what) -> void:
 	if selected == what: return
 	if not selected == null:
 		selected.is_selected = false
-	
+
 	selected = what
 	
-	if not selected == null:
-		selected.is_selected = true
-	
 	moving = false
+	
+	if selected == null:
+		print("Diselected")
+	else:
+		selected.is_selected = true
+		print("Selected " + str(selected))
 	
 	emit_signal("selected_changed", selected)
 
